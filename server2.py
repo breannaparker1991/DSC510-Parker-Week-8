@@ -42,46 +42,77 @@
 # for word in data:
 #   print(word)
 
-def process_line(line,word_count_dict):
-  import string
-  for line in word_count_dict:
-    line = line.rstrip()
-    line = line.translate(line.maketrans('','', word_count_dict.punctuation))
-    line = line.lower()
-    words = line.split()
-    add_word(words,word_count_dict)
+# def process_line(line,word_count_dict):
+#   import string
+#   for line in word_count_dict:
+#     line = line.rstrip()
+#     line = line.translate(line.maketrans('','', word_count_dict.punctuation))
+#     line = line.lower()
+#     words = line.split()
+#     add_word(words,word_count_dict)
 
-def add_word(word, word_count_dict):
-  for word in word_count_dict:
-    if word in word_count_dict:
-      word_count_dict[word] +=1
-    else:
-      word_count_dict[word] = 1
+# def add_word(word, word_count_dict):
+#   for word in word_count_dict:
+#     if word in word_count_dict:
+#       word_count_dict[word] +=1
+#     else:
+#       word_count_dict[word] = 1
       
-        lst = list()
-  for key,val in list(gba_dict.items()):
-    lst.append((val,key))
-    lst.sort(reverse = True)
-    for key,val in lst[:10]:
-      print(key,val)
+#         lst = list()
+#   for key,val in list(gba_dict.items()):
+#     lst.append((val,key))
+#     lst.sort(reverse = True)
+#     for key,val in lst[:10]:
+#       print(key,val)
       
       
-def pretty_print(word_count_dict):
-  word_count_dict = dict(reversed(sorted(word_count_dict.items(), key=lambda item: item[1])))
-  print("total words:", sum(word_count_dict.values()))
-  print('-' * 30)
-  for word,count in word_count_dict.items():
-    print('{:<26}{:>}'.format('Word', "Count"))
+# def pretty_print(word_count_dict):
+#   word_count_dict = dict(reversed(sorted(word_count_dict.items(), key=lambda item: item[1])))
+#   print("total words:", sum(word_count_dict.values()))
+#   print('-' * 30)
+#   for word,count in word_count_dict.items():
+#     print('{:<26}{:>}'.format('Word', "Count"))
         
-def main():
-  word_count_dict = {}
-  gba_file = open("Gettysburg.txt", "r")
-  for line in gba_file:
-    process_line(line,word_count_dict)
+# def main():
+#   word_count_dict = {}
+#   gba_file = open("Gettysburg.txt", "r")
+#   for line in gba_file:
+#     process_line(line,word_count_dict)
 
-    pretty_print(word_count_dict)
+#     pretty_print(word_count_dict)
 
-if __name__ == "__main__":
-  main()
+# if __name__ == "__main__":
+#   main()
   
-main()
+# main()
+
+
+    # if word in gba_dict:
+    #   gba_dict[word] += 1
+    # else:
+    #   gba_dict[word] = 1
+    
+  try:
+    fname = input("Enter the file name:")
+    fhand = open(fname)
+  except:
+    print("File cannot be opened")
+    exit()
+  for line in fhand:
+    
+    
+    
+    def process_file(gba_dict):
+  fname = input("enter the file name:")
+  try:
+    # new_file = open(fname)
+    with open (fname, 'w') as f:
+      print(gba_dict)
+  except:
+    print("File cannot be opened:")
+    exit()
+    
+      fname = input("enter the file name:")
+  new_file = open(fname)
+  new_file.write(gba_dict)
+  close(new_file)
