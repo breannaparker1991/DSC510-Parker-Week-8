@@ -1,34 +1,48 @@
-import json
+#DSC 510
+#Week 9
+#Gettysburg 9.1
+#Author Breanna Parker
+#10/24/22
 
-def process_line(line,word_count_dict):
-  for line in word_count_dict:
+
+import string
+
+gba_dict = dict()
+
+def add_word(words,gba_dict):
+  for words in gba_dict:
+    if words in gba_dict:
+      gba_dict[words] +=1
+    else:
+      gba_dict[words] = 1
+  print(gba_dict)
+
+def process_lines():
+  for line in gba_dict:
     line = line.rstrip()
-    line = line.translate(line.maketrans('','', word_count_dict.punctuation))
+    line = line.translate(line.maketrans('','', gba_dict.punctuation))
     line = line.lower()
     words = line.split()
-    add_word(words,word_count_dict)
+    add_word(words,gba_dict)
 
-def add_word(word, word_count_dict):
-  for word in word_count_dict:
-    if word in word_count_dict:
-      word_count_dict[word] +=1
-    else:
-      word_count_dict[word] = 1
-      
-      
-def pretty_print(word_count_dict):
-  for key,value in word_count_dict():
-    print('{:11}{:11}'.format('Word', "Count"))
-        
-def main():
-  word_count_dict = {}
-  gba_file = open("Gettysburg.txt")
+def pretty_print(gba_dict):
+  lst = list()
+  for key,val in list(gba_dict.items()):
+    lst.append((val,key))
+    lst.sort(reverse = True)
+    for key,val in lst[:10]:
+      print(key,val)
+
+def main(gba_dict):
+  try:
+    gba_file = open("Gettysburg.txt", 'r')
+  except:
+    print("File cannot be opened")
+    exit()
   for line in gba_file:
-    process_line(line,word_count_dict)
-
-    pretty_print(word_count_dict)
-
-if __name__ == "__main__":
+    process_lines(line, gba_dict)
+    pretty_print(gba_dict)
+  
+if __name__ == '__main__':
   main()
   
-main()
