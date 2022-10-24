@@ -58,6 +58,13 @@ def add_word(word, word_count_dict):
     else:
       word_count_dict[word] = 1
       
+        lst = list()
+  for key,val in list(gba_dict.items()):
+    lst.append((val,key))
+    lst.sort(reverse = True)
+    for key,val in lst[:10]:
+      print(key,val)
+      
       
 def pretty_print(word_count_dict):
   word_count_dict = dict(reversed(sorted(word_count_dict.items(), key=lambda item: item[1])))
