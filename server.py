@@ -17,23 +17,20 @@ def add_word(words,gba_dict):
       gba_dict[words] = 1
   print(gba_dict)
 
-def process_lines():
+def process_lines(line, gba_dict):
   for line in gba_dict:
     line = line.rstrip()
     line = line.translate(line.maketrans('','', gba_dict.punctuation))
     line = line.lower()
     words = line.split()
     add_word(words,gba_dict)
+  
 
 def pretty_print(gba_dict):
-  lst = list()
-  for key,val in list(gba_dict.items()):
-    lst.append((val,key))
-    lst.sort(reverse = True)
-    for key,val in lst[:10]:
-      print(key,val)
+  for word in sorted(gba_dict.items(), key = lambda x: (-x[1], x[0] )):
+    print (word[0], word[1])
 
-def main(gba_dict):
+def main():
   try:
     gba_file = open("Gettysburg.txt", 'r')
   except:
@@ -46,3 +43,5 @@ def main(gba_dict):
 if __name__ == '__main__':
   main()
   
+  
+main()
