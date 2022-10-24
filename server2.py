@@ -1,37 +1,8 @@
 
-import json
+
 
 # gba_file = open('Gettysburg.txt')
 
-
-
-with open('Gettysburg.txt', 'r') as file:
-  data = file.read().splitlines()
-gba_dict = dict()
-
-def add_word():
-  for word in data:
-    if word in gba_dict:
-      gba_dict[word] +=1
-    else:
-      gba_dict[word] = 1
-  print(gba_dict)
-
-def process_lines():
-  for line in data:
-    line = line.rstrip()
-    line = line.translate(line.maketrans('','', data.punctuation))
-    line = line.lower()
-    words = line.split()
-    add_word(data)
-  print(process_lines)
-
-process_lines()
-
-def main(gba_dict):
-  for key in gba_dict:
-    print(key, gba_dict[key])
-  
   
 # def add_word():
 #   with open("Gettysburg.txt") as f:
@@ -70,3 +41,40 @@ def main(gba_dict):
 
 # for word in data:
 #   print(word)
+
+def process_line(line,word_count_dict):
+  import string
+  for line in word_count_dict:
+    line = line.rstrip()
+    line = line.translate(line.maketrans('','', word_count_dict.punctuation))
+    line = line.lower()
+    words = line.split()
+    add_word(words,word_count_dict)
+
+def add_word(word, word_count_dict):
+  for word in word_count_dict:
+    if word in word_count_dict:
+      word_count_dict[word] +=1
+    else:
+      word_count_dict[word] = 1
+      
+      
+def pretty_print(word_count_dict):
+  word_count_dict = dict(reversed(sorted(word_count_dict.items(), key=lambda item: item[1])))
+  print("total words:", sum(word_count_dict.values()))
+  print('-' * 30)
+  for word,count in word_count_dict.items():
+    print('{:<26}{:>}'.format('Word', "Count"))
+        
+def main():
+  word_count_dict = {}
+  gba_file = open("Gettysburg.txt", "r")
+  for line in gba_file:
+    process_line(line,word_count_dict)
+
+    pretty_print(word_count_dict)
+
+if __name__ == "__main__":
+  main()
+  
+main()
