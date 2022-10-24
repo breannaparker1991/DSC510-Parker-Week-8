@@ -10,12 +10,11 @@ import string
 gba_dict = dict()
 
 def add_word(words,gba_dict):
-  for words in gba_dict:
-    if words in gba_dict:
-      gba_dict[words] +=1
+  for word in words:
+    if word not in gba_dict:
+      gba_dict[word] =1
     else:
-      gba_dict[words] = 1
-  print(gba_dict)
+      gba_dict[word] += 1
 
 def process_lines(line, gba_dict):
   for line in gba_dict:
