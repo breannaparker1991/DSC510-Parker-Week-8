@@ -4,9 +4,8 @@
 #Author Breanna Parker
 #10/24/22
 
-from fileinput import close
 import string
-import operator
+
 
 gba_dict = dict()
 
@@ -15,7 +14,6 @@ def add_word(words,gba_dict):
     gba_dict[word] = gba_dict.get(word,0) + 1
 
 def process_lines(line, gba_dict):
-  # for line in gba_dict:
     line = line.rstrip()
     line = line.translate(line.maketrans('','', string.punctuation))
     line = line.lower()
@@ -24,14 +22,25 @@ def process_lines(line, gba_dict):
   
 
 def pretty_print(gba_dict):
-    for word in sorted(gba_dict, key = gba_dict.get, reverse=True):
-      print (word, gba_dict[word])
+    lst = []
+    for key, val in gba_dict.items():
+      lst.append((val,key))
+    lst.sort(reverse=True)
+    print('{:11s}{:11s}'.format("Word","Count"))
+    print(''*21)
+    for val, key in lst:
+      print('{:12s} {:<3d}'.format(key,val))
+    # previous code worked but didn't look as pretty, keep for refernce
+    # for word in sorted(gba_dict, key = gba_dict.get, reverse=True):         
+    #   print (word, gba_dict[word])
+    
 
 def process_file(gba_dict):
   fname = input("enter the file name:")
   try:
+    # new_file = open(fname)
     with open (fname, 'w') as f:
-      fname.write(gba_dict)
+      print(gba_dict)
   except:
     print("File cannot be opened:")
     exit()
@@ -42,13 +51,15 @@ def main():
     with open("Gettysburg.txt", 'r') as gba_file:
       for line in gba_file:
         process_lines(line, gba_dict)
+      print("Length of Dictionary", len(gba_dict))
       pretty_print(gba_dict)
   except:
     print("File cannot be opened")
     exit()
-  process_file(gba_dict)
+  # process_file(gba_dict)
+
+
 if __name__ == '__main__':
   main()
   
   
-main()
